@@ -10,11 +10,14 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
+        
+        //prerequisite is we should know about the merge sort first it then complete this
+        //when there are only one node or linked list is empty then it is already sorted
           if (head == null || head.next == null) {
             return head;
         }
-
-
+        
+        //merge sort calculations
         ListNode mid = getMid(head);
         ListNode left = sortList(head);
         ListNode right = sortList(mid);
@@ -22,7 +25,8 @@ class Solution {
         return merge(left, right);
 
     }
-
+    
+    //code fo merging of two linked list also avaliavle this question on leetcode
     ListNode merge(ListNode list1, ListNode list2) {
         ListNode dummyhead = new ListNode();
         ListNode tail = dummyhead;
@@ -41,6 +45,7 @@ class Solution {
 
     }
 
+    //finding middle of the linekd list
     public ListNode getMid(ListNode head) {
         ListNode midprev = null;
         while (head != null && head.next != null) {
