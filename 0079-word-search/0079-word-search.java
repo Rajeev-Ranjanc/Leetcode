@@ -4,6 +4,8 @@ class Solution {
     
     public boolean exist(char[][] board, String word) {
         
+        //preety hard questions not get it but did it through help
+        
          if (board == null || board.length == 0 || word.isEmpty()) {
             return false;
         }
