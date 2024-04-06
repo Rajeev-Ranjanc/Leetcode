@@ -1,23 +1,20 @@
 class Solution {
     public int mySqrt(int x) {
-        return (int)Math.sqrt(x);
-//         int start = 0;
-//         int end = x;
-//         int ans = 0;
+        // return (int)Math.sqrt(x);
+       int start = 0;
+        int end = x;
+        while (start <= end) {
+            long mid = start + (end - start) / 2;
+            long sq = mid * mid;
 
-//         while (start < end) {
-
-//             int mid = start + (end - start) / 2;
-
-//             if (mid * mid == x) {
-//                 return mid;
-//             } else if (mid * mid < x) {
-//                 start = mid + 1;
-//                 ans = mid;
-//             } else {
-//                 end = mid - 1;
-//             }
-//         }
-//         return ans;
+            if (sq == x) {
+                return (int) mid;
+            } else if (sq > x) {
+                end = (int) (mid - 1);
+            } else {
+                start = (int) (mid + 1);
+            }
+        }
+        return end;
     }
 }
