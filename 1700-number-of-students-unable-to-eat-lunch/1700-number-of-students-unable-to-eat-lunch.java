@@ -14,13 +14,19 @@ class Solution {
 
         //Now sandwiches party
         for (int i = 0; i < n; i++) {
+            
             int sand = sandwiches[i];
-
+            
+// here I'm checking is sandwhiches tasty
+            
             if (arr[sand]== 0) {
                 return n - i;
             }
+            
             arr[sand]--;
+            
         }
+        
         return 0;
 
     }
