@@ -34,6 +34,12 @@ class Solution {
         
         
         // check this code although generative
+        /*
+            This modification ensures that the loop terminates when all cells in the matrix are filled, even for odd-sized matrices. Also, it adds a check in each loop iteration to ensure val does not exceed n * n, which could happen if the matrix size is odd.
+            
+            In this context, n * n represents the total number of cells in an n x n matrix. Since you are filling the matrix in a spiral order starting from the top-left corner and moving clockwise, you need to ensure that you stop filling the matrix once you have populated all n * n cells. If you don't check this condition, you might end up trying to access cells outside the bounds of the matrix, which would result in an ArrayIndexOutOfBoundsException.
+            
+        */
         int minr = 0;
         int minc = 0;
         int maxr = n - 1;
