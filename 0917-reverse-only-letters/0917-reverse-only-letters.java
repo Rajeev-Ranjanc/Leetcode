@@ -1,5 +1,8 @@
 class Solution {
     public String reverseOnlyLetters(String s) {
+        /*
+        Its a simple if else case if the present both charcters is from Capital letters or Small Letters then           only swap otherwise check which is not are alphabet increase or decrease the i , j according to them which is not letters 
+        */
         StringBuilder sbr = new StringBuilder(s);
         int i = 0;
         int j = s.length() - 1;
