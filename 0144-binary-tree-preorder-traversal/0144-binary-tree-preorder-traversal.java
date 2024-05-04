@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-   
+     List<Integer> list = new ArrayList<>();
     
     public List<Integer> preorderTraversal(TreeNode root) {
         /*
@@ -22,15 +22,15 @@ class Solution {
         declaring the list outside the function and keep adding elements into the list and finally return 
         the list
         */
-        List<Integer> list = new ArrayList<>();
+      
         if(root == null){
            
-           return list;
+           return new ArrayList<>();
            
        }
         list.add(root.val);
-        list.addAll(preorderTraversal(root.left));
-        list.addAll(preorderTraversal(root.right));
+        preorderTraversal(root.left);
+        preorderTraversal(root.right);
         return list;
     }
     
