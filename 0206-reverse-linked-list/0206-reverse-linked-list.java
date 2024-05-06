@@ -16,27 +16,25 @@ class Solution {
             return head;
         }
         
-        ListNode prev = head;
+        ListNode prevnode = null;
+        ListNode currnode = head;
+        ListNode nextnode = head;
         
-        ListNode current = head.next;
-        
-        while(current != null ){
+        while(nextnode != null){
             
-            ListNode next = current.next;
+            nextnode = nextnode.next;
             
-            current.next = prev;
+            currnode.next = prevnode;
             
-            //upgrade
-            prev = current;
+            prevnode = currnode;
             
-            current = next;
+            currnode = nextnode;
             
         }
         
-        head.next = null;
+        head = prevnode;
+        return head;
         
-        head = prev;
         
-        return prev;
     }
 }
