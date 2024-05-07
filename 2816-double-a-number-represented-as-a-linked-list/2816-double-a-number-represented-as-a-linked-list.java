@@ -11,6 +11,16 @@
 class Solution {
     
  public ListNode reverse(ListNode head) {
+     
+     /*
+        what a felling bro Just Amazing Feels Awesome 
+        In this Problem First fo all reversed the Linked list traversed the entire linked list
+        using a temporary pointer and while traversing the linked list and I get the data of every node and             multiplied by 2 and
+        added carry variable into them which is initialised out of while loop and store a carry into them and           divided that
+        variable by 10 and store result into them and keep updating the node value before moving to the next             node and after
+        traversing the entire list again reversed them and after that made a single check is carry greater than         0 if yes then
+        created the node and append it to the starting of the linked list and simply returned the head pointer
+     */
         
         if(head == null || head.next == null){
             
