@@ -1,6 +1,13 @@
 class Solution {
     public String[] findRelativeRanks(int[] score) {
-        
+        /*
+
+Pretty good question marked easy but very good question for practice I did this by hashing 
+we create an array of maximum element present in array plus one and attached their rank according to their 
+score, and later we create an array named result in them, I start storing them the result by checking according to 
+their score see code you will understand more
+
+ */
         int max = score[0];
 
         for (int i = 1; i < score.length; i++) {
