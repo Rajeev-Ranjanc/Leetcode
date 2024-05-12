@@ -1,6 +1,11 @@
 class Solution {
     public int[][] largestLocal(int[][] grid) {
         
+        /*
+    https://leetcode.com/problems/largest-local-values-in-a-matrix/
+//  to solve this I have runs two loop one inside another one In upto n-2 times and find the largest elements 
+    into the grid by within i to i+3 sub grid and put that element into the maxLocale matrix and simply returned them
+ */
         int n = grid.length;
         
         int[][] maxLocal = new int[n - 2][n - 2];
