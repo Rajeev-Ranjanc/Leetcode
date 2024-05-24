@@ -10,66 +10,54 @@
  * }
  */
 public class Solution {
-
-
-    //linked list cycle 2
-//    https://leetcode.com/problems/linked-list-cycle-ii/
     public ListNode detectCycle(ListNode head) {
-        int length = 0;
+  
+        
+/*
+raghav sir logic
+
+First detect the cycle using slow and fast pointer. Once you know that there is cycle present in the list
+then declare a temp variable node from start and keep moving temp and slow pointer by one it will always
+meet at a node and that node will be the start of cycle node always
+
+*/
+        
+        //base case
+        if(head == null || head.next == null){
+            return null;
+        }
+
         ListNode slow = head;
         ListNode fast = head;
+        
+        ListNode temp = head;
+
 
         while (fast != null && fast.next != null) {
+
             slow = slow.next;
             fast = fast.next.next;
 
-            //Cycle detected
-            if (fast == slow) {
-                length = lengthCycle(slow);
+//            if there will be cycle then it will be break
+            if (slow == fast) {
                 break;
             }
 
         }
-        if (length == 0) {
+
+        if (slow != fast) {
+//            it means there is no cycle
             return null;
         }
 
-        //find the start node
-        ListNode first = head;
-        ListNode second = head;
-        while (length > 0) {
-            second = second.next;
-            length--;
-        }
 
-        //now keep moving both forward and they will meet at cycle point
-        while (first != second) {
-            first = first.next;
-            second = second.next;
-        }
-        //now they meet at the cycle point both are pointing same node, so we can return
-        //any one first or second
-        return second;
-    }
-    
-    public static int lengthCycle(ListNode head) {
-        ListNode fast = head;
-        ListNode slow = head;
-
-        while (fast != null && fast.next != null) {
-            fast = fast.next.next;
+        while (slow != temp) {
+            
             slow = slow.next;
-            if (fast == slow) {
-                // calculate the length
-                ListNode temp = slow;
-                int length = 0;
-                do {
-                    temp = temp.next;
-                    length++;
-                } while (temp != slow);
-                return length;
-            }
+            temp = temp.next;
+            
         }
-        return 0;
+
+        return slow;
     }
 }
