@@ -1,17 +1,31 @@
 class Solution {
-    public List<List<Integer>> subsets(int[] arr) {
-          List<List<Integer>> outer = new ArrayList<>();
+    
+    static List<List<Integer>> list;
+    
+    public List<List<Integer>> subsets(int[] nums) {
+        
+        list = new ArrayList<>();
 
-        outer.add(new ArrayList<>());
+        ArrayList<Integer> arr = new ArrayList<>();
+        helper(0, nums, arr);
 
-        for (int num : arr) {
-            int n = outer.size();
-            for (int i = 0; i < n; i++) {
-                List<Integer> internal = new ArrayList<>(outer.get(i)); //now internal will be copy of the                      outer(i)
-                internal.add(num);
-                outer.add(internal);
-            }
+        return list;
+        
+    }
+     public static void helper(int index, int[] nums, ArrayList<Integer> arr) {
+
+        if (index == nums.length) {
+            list.add(new ArrayList<>(arr)); // Add a new copy of arr
+            return;
         }
-        return outer;
+
+        int num = nums[index];
+
+        // Not take the current element
+        helper(index + 1, nums, new ArrayList<>(arr));
+
+        // Take the current element
+        arr.add(num);
+        helper(index + 1, nums, new ArrayList<>(arr));
     }
 }
