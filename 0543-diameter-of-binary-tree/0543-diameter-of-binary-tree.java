@@ -14,43 +14,31 @@
  * }
  */
 class Solution {
- 
-    
     public int diameterOfBinaryTree(TreeNode root) {
-        /*
-        This method will take only O(N) time complexity because in this first we declare a variavle of pair 
-        class types in which I'm storing the length as well as the height of the binary node in the previous
-        previous method we were doing in that time complexity was the o(N^2) after that to improve that 
-        i'm doing by this method in this first variable which is of pair class types represents the diameter and
-        second variable represents the height of the binary tree
-        */
-        return diameterFast(root).first;
+        
+          if (root == null) {
+            return 0;
+        }
+//        longest path passing through the root node
+        int myDia = levels(root.left) + levels(root.right);
+
+//        longest path present in the left subtree
+        int leftDia = diameterOfBinaryTree(root.left);
+
+//        longest path present into the right subtree
+        int rightDia = diameterOfBinaryTree(root.right);
+
+        return Math.max(myDia, Math.max(leftDia, rightDia));
+        
     }
     
-    public Pair diameterFast(TreeNode root) {
-        // base case
+  public int levels(TreeNode root) {
+
         if (root == null) {
-            return new Pair(0, 0);
+            return 0;
         }
 
-        Pair left = diameterFast(root.left);
-        Pair right = diameterFast(root.right);
-
-        int op1 = left.first;
-        int op2 = right.first;
-        int op3 = left.second + right.second;
-
-        Pair ans = new Pair(Math.max(op1, Math.max(op2, op3)), Math.max(left.second, right.second) + 1);
-
-        return ans;
+        return Math.max(levels(root.left), levels(root.right)) + 1;
     }
 
-    class Pair {
-        int first, second;
-
-        public Pair(int first, int second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
 }
