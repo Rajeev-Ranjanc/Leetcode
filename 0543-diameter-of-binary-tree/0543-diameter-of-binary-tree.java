@@ -15,7 +15,21 @@
  */
 class Solution {
     public int diameterOfBinaryTree(TreeNode root) {
-        
+        /*
+    https://leetcode.com/problems/diameter-of-binary-tree/
+    Diameter is the longest path between any two nodes of the tree,
+    that node may pass from root of the node or not may be the longest
+    path between teo nodes present in the left subtree or right subtree.
+    So we need to find the longest path including root node ans in the
+    left subtree as well as right subtree.
+
+    using root node I can simply find the longest path height(level) of
+    left subtree + levels of right subtree
+
+    in the left subtree I just need to find left diameter and same for 
+    right subtree and finally need to return max of these 3
+
+ */
           if (root == null) {
             return 0;
         }
