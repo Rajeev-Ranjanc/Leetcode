@@ -11,46 +11,56 @@
 class Solution {
     public boolean isPalindrome(ListNode head) {
         
-        int n = length(head);
-        int[] nums = new int[n];
-        
-        //copying elements into the array
-        ListNode node = head;
-        
-        int index = 0;
-        
-        while(node!= null){
-            
-            nums[index++] = node.val;
-            
-            node = node.next;
+        if(head == null || head.next == null){
+            return true;
         }
         
-        for(int i=0;i<n/2;i++){
+        ListNode slow = head;
+        ListNode fast = head;
+        
+       // Finding the middle of the list
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode temp = reverse(slow);
+        // slow.next = null;
+
+        ListNode first = head;
+        ListNode second = temp;
+        
+//      Comparing both list
+        while (second != null) {
             
-            if(nums[i] != nums[n-i-1])
+            if (first.val != second.val) {
                 
                 return false;
+            }
+            
+            first = first.next;
+            second = second.next;
+
         }
         
         return true;
-          
+        
     }
-    
-    public int length(ListNode head){
+//     reverse linked list
+    private ListNode reverse(ListNode head) {
         
-        int n = 0;
-        
-        ListNode node = head;
-        
-        while(node != null){
-            
-            n++;
-            
-            node = node.next;
-            
+        ListNode nextNode = head;
+        ListNode currNode = head;
+        ListNode prevNode = null;
+
+        while (nextNode != null) {
+            nextNode = nextNode.next;
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+
         }
-        
-        return n;
+       
+        return prevNode;
     }
 }
