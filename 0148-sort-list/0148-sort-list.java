@@ -10,51 +10,87 @@
  */
 class Solution {
     public ListNode sortList(ListNode head) {
-        
-        //prerequisite is we should know about the merge sort first it then complete this
-        //when there are only one node or linked list is empty then it is already sorted
-          if (head == null || head.next == null) {
+/*
+    Again Nothing fancy! Just applied merge sort and later merge both sorted list.
+    First of all find the middle of the linked list for even length take left middle and for odd take
+    mid and divided both into list and name first and second and make a recursive call passing first and
+    second return value storing into first and second as well now make a call to merge the first and second 
+    list and finally returned the ans which is returned by the merge methods
+
+ */
+         if (head == null || head.next == null) {
             return head;
         }
+        ListNode first = head; // its redundant I can pass this head on this place
         
-        //merge sort calculations
-        ListNode mid = getMid(head);
-        ListNode left = sortList(head);
-        ListNode right = sortList(mid);
+        ListNode slow = head;
+        
+        ListNode fast = head;
 
-        return merge(left, right);
+        while (fast.next != null && fast.next.next != null) {
 
+//            fast.next -> for the odd length of the linked list.
+//            fast.next.next -> for even length of the linked list (both are to divide linked list into two parts)
+            slow = slow.next;
+            fast = fast.next.next;
+
+        }
+
+        ListNode second = slow.next;
+        slow.next = null;
+
+//        now I have divided the linked list into two now apply magic(recursion)
+        first = sortList(first);
+        
+        second = sortList(second);
+
+//        now sorted list into two part noe need to merge this
+        ListNode ans = merge(first, second);
+        
+        return ans;
     }
     
-    //code fo merging of two linked list also avaliavle this question on leetcode
-    ListNode merge(ListNode list1, ListNode list2) {
-        ListNode dummyhead = new ListNode();
-        ListNode tail = dummyhead;
-        while (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                tail.next = list1;
-                list1 = list1.next;
-            } else {
-                tail.next = list2;
-                list2 = list2.next;
+    
+    
+    public ListNode merge(ListNode list1, ListNode list2) {
+        
+    ListNode dummy = new ListNode(100);
+        
+        ListNode temp = dummy;
+
+        ListNode temp1 = list1;
+        
+        ListNode temp2 = list2;
+        
+        while (temp1 != null && temp2 != null) {
+            
+            if (temp1.val <= temp2.val) {
+                
+                temp.next = temp1;
+                
+                temp1 = temp1.next;
+
+            } else { //
+                
+                temp.next = temp2;
+                
+                temp2 = temp2.next;
             }
-            tail = tail.next;
+            
+            temp = temp.next;
         }
-        tail.next = (list1 != null) ? list1 : list2;
-        return dummyhead.next;
-
-    }
-
-    //finding middle of the linekd list
-    public ListNode getMid(ListNode head) {
-        ListNode midprev = null;
-        while (head != null && head.next != null) {
-            midprev = (midprev == null) ? head : midprev.next;
-            head = head.next.next;
+        
+        if (temp1 == null) {
+            
+            temp.next = temp2;
+            
+        } else { // temp 2 is null
+            
+            temp.next = temp1;
+            
         }
-
-        ListNode mid = midprev.next;
-        midprev.next = null;
-        return mid;
+        
+        return dummy.next;
     }
+    
 }
